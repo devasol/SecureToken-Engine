@@ -1,10 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const crypto = require("crypto");
 const cors = require("cors");
-
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  methods: ["GET", "POST"],
+  credentials: true
+}));
 app.use(express.json());
 const port = process.env.PORT || 5000;
 
