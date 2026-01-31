@@ -143,9 +143,9 @@ function App() {
   };
 
   const JsonBlock = ({ title, data, color, keyColor }) => (
-    <div className="space-y-1.5">
+    <div className="space-y-2">
       <h3 className={`text-[10px] font-black uppercase tracking-[0.2em] ${color}`}>{title}</h3>
-      <div className="bg-black/80 border border-white/20 rounded-xl p-4 font-mono text-[10px] leading-relaxed overflow-x-auto shadow-inner">
+      <div className="bg-black/80 border border-white/20 rounded-xl p-4 md:p-6 font-mono text-[11px] md:text-xs leading-relaxed overflow-x-auto shadow-inner">
         <pre className="text-neutral-300">
           {Object.entries(data).map(([key, val], i) => (
             <div key={key}>
@@ -162,49 +162,50 @@ function App() {
   );
 
   return (
-    <div className="relative h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden">
+    <div className="relative min-h-screen lg:h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-12 lg:overflow-hidden">
       <div className="mesh-bg"></div>
       <div className="absolute inset-0 bg-dot-grid opacity-30"></div>
 
-      <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-stretch justify-center gap-4 lg:max-h-[85vh]">
+      {/* Main Hub Container */}
+      <div className="relative z-10 w-full max-w-7xl flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-6 lg:gap-8 lg:h-[82vh]">
         
         {/* Generator Window */}
-        <div className="flex-1 glass-morphism rounded-[2.5rem] p-6 md:p-8 transition-all duration-700 flex flex-col justify-between overflow-hidden">
-          <div className="space-y-5">
-            <div className="text-left space-y-1.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-[9px] font-black uppercase tracking-[0.2em] text-cyan-300">
+        <div className="w-full flex-1 glass-morphism rounded-[2.5rem] p-6 md:p-10 transition-all duration-700 flex flex-col justify-between overflow-hidden shadow-2xl">
+          <div className="space-y-6">
+            <div className="text-left space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-300">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
                 Token Engine
               </div>
-              <h1 className="text-4xl font-black tracking-tighter gradient-text leading-none">Generate</h1>
+              <h1 className="text-3xl md:text-5xl font-black tracking-tighter gradient-text leading-none">Generate</h1>
             </div>
 
-            <div className="flex flex-col gap-3">
-               <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col gap-4">
+               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
                 {SECURITY_LEVELS.map((tier) => (
                   <button
                     key={tier.id}
                     onClick={() => handleLevelSelect(tier)}
-                    className={`flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl transition-all duration-300 border ${
+                    className={`flex flex-col items-center justify-center gap-3 py-4 px-3 rounded-2xl transition-all duration-300 border ${
                       level.id === tier.id 
                       ? "bg-white/20 border-white/40 text-white shadow-lg scale-[1.02]" 
                       : "bg-white/[0.05] border-white/10 text-neutral-300 hover:bg-white/[0.1] hover:border-white/20"
                     }`}
                   >
-                    <div className={`p-1.5 rounded-xl ${level.id === tier.id ? `bg-gradient-to-br ${tier.color}` : "bg-neutral-800 border border-white/10"}`}>
+                    <div className={`p-2 rounded-xl ${level.id === tier.id ? `bg-gradient-to-br ${tier.color}` : "bg-neutral-800 border border-white/10"}`}>
                       {tier.icon}
                     </div>
-                    <span className={`text-[9px] font-black uppercase tracking-widest ${level.id === tier.id ? "text-white" : "text-neutral-200"}`}>{tier.name}</span>
+                    <span className={`text-[10px] font-black uppercase tracking-widest ${level.id === tier.id ? "text-white" : "text-neutral-200"}`}>{tier.name}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-5 bg-black/40 rounded-[2rem] p-6 border border-white/15 shadow-inner">
-               <div className="flex justify-between items-end border-b border-white/10 pb-3">
-                  <span className="text-[9px] font-black text-neutral-200 uppercase tracking-[0.2em]">Entropy</span>
-                  <span className="font-mono text-sm font-black text-cyan-400">
-                      {length}<span className="text-[9px] text-neutral-300 ml-1">BYTES</span>
+            <div className="space-y-6 bg-black/40 rounded-[2.5rem] p-6 md:p-8 border border-white/15 shadow-inner">
+               <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                  <span className="text-[10px] font-black text-neutral-200 uppercase tracking-[0.2em]">Entropy</span>
+                  <span className="font-mono text-base font-black text-cyan-400">
+                      {length}<span className="text-[10px] text-neutral-300 ml-1">BYTES</span>
                   </span>
                </div>
                <input
@@ -214,16 +215,16 @@ function App() {
                   step="4"
                   value={length}
                   onChange={(e) => setLength(parseInt(e.target.value))}
-                  className="w-full h-1 bg-white/20 rounded-full appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full h-1.5 bg-white/20 rounded-full appearance-none cursor-pointer accent-cyan-400"
                 />
 
               <button
                 onClick={generateToken}
                 disabled={loading}
-                className={`w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-500 active:scale-[0.98] flex items-center justify-center gap-3 ${
+                className={`w-full py-4 md:py-5 rounded-2xl font-black text-[11px] md:text-[12px] uppercase tracking-[0.21em] transition-all duration-500 active:scale-[0.98] flex items-center justify-center gap-3 ${
                   loading
                     ? "bg-neutral-800 text-neutral-400"
-                    : "bg-white text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+                    : "bg-white text-black hover:shadow-[0_0_40px_rgba(255,255,255,0.4)]"
                 }`}
               >
                 {loading ? "Processing..." : "Execute Generation"}
@@ -234,45 +235,45 @@ function App() {
               <div 
                 onClick={copyToClipboard}
                 className={`transition-all duration-500 rounded-3xl border cursor-pointer border-dashed ${
-                  token ? "bg-black/95 border-cyan-500/50 min-h-[120px] shadow-2xl" : "bg-white/[0.03] border-white/20 min-h-[100px]"
-                } p-8 flex items-center justify-center relative overflow-hidden`}
+                  token ? "bg-black/95 border-cyan-500/50 min-h-[140px] shadow-2xl" : "bg-white/[0.03] border-white/20 min-h-[100px]"
+                } p-6 md:p-10 flex items-center justify-center relative overflow-hidden`}
               >
                 {token ? (
-                  <p className="text-xs font-mono text-white break-all text-center leading-relaxed select-none font-bold max-w-[90%]">
+                  <p className="text-xs md:text-sm font-mono text-white break-all text-center leading-relaxed select-none font-bold max-w-[90%]">
                     {token}
                   </p>
                 ) : (
-                  <span className="text-neutral-400 text-[10px] font-black uppercase tracking-[0.3em]">Ready</span>
+                  <span className="text-neutral-400 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em]">System Ready</span>
                 )}
                 {token && (
-                   <div className="absolute top-3 right-5 text-[8px] font-black text-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-cyan-950/60 px-2 py-0.5 rounded-full border border-cyan-500/30">Copy</div>
+                   <div className="absolute top-4 right-6 text-[9px] font-black text-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-500/30">Copy</div>
                 )}
               </div>
               {copied && (
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-[0_0_20px_rgba(34,197,94,0.5)]">Copied</div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-black px-5 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest shadow-[0_0_30px_rgba(34,197,94,0.6)] animate-in fade-in zoom-in duration-300">Copied</div>
               )}
             </div>
           </div>
-          <p className="text-[9px] font-black text-cyan-400/80 uppercase tracking-widest mt-6 text-center">Industrial Standard v4.2</p>
+          <p className="text-[10px] font-black text-cyan-400/80 uppercase tracking-widest mt-8 text-center">Industrial Standard v4.2</p>
         </div>
 
         {/* Verifier Window */}
-        <div className="flex-[1.4] glass-morphism rounded-[2.5rem] p-6 md:p-8 transition-all duration-700 flex flex-col border-white/10 overflow-hidden">
-             <div className="space-y-5 h-full flex flex-col">
-                <div className="text-left space-y-1.5">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-[9px] font-black uppercase tracking-[0.2em] text-purple-300">
+        <div className="w-full flex-[1.3] glass-morphism rounded-[2.5rem] p-6 md:p-10 transition-all duration-700 flex flex-col border-white/10 overflow-hidden shadow-2xl">
+             <div className="space-y-6 h-full flex flex-col">
+                <div className="text-left space-y-2">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-[10px] font-black uppercase tracking-[0.2em] text-purple-300">
                         <span className="flex h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"></span>
                         Validator
                     </div>
-                    <h1 className="text-4xl font-black tracking-tight text-white leading-none">Verify</h1>
+                    <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white leading-none">Verify</h1>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 flex-1 overflow-hidden">
                     {/* Left: Input */}
                     <div className="space-y-4 flex flex-col h-full overflow-hidden">
-                        <div className="flex flex-col gap-2 flex-1 overflow-hidden">
-                             <div className="flex justify-between items-center text-[9px] font-black text-neutral-300 uppercase tracking-[0.2em]">
-                                <span>Input</span>
+                        <div className="flex flex-col gap-3 flex-1 overflow-hidden">
+                             <div className="flex justify-between items-center text-[10px] font-black text-neutral-300 uppercase tracking-[0.2em]">
+                                <span>Input Payload</span>
                                 {verifyStatus && (
                                     <span className={(verifyStatus.valid ? "text-green-400" : "text-red-400") + " font-bold"}>
                                         {verifyStatus.valid ? "• Verified" : "• Invalid"}
@@ -282,86 +283,94 @@ function App() {
                              <textarea
                                 value={verifyToken}
                                 onChange={(e) => setVerifyToken(e.target.value)}
-                                className={`w-full flex-1 bg-black/80 border rounded-2xl p-6 font-mono text-xs outline-none transition-all resize-none placeholder:text-neutral-600 ${
-                                    verifyStatus?.valid ? "border-green-500/50 text-green-300 shadow-[0_0_20px_rgba(34,197,94,0.1)]" : "border-white/20 text-white"
-                                } focus:border-purple-500/50`}
-                                placeholder="Paste token..."
+                                className={`w-full flex-1 bg-black/80 border rounded-[2rem] p-6 md:p-8 font-mono text-xs md:text-sm outline-none transition-all resize-none placeholder:text-neutral-600 ${
+                                    verifyStatus?.valid ? "border-green-500/50 text-green-300 shadow-[0_0_30px_rgba(34,197,94,0.15)]" : "border-white/20 text-white"
+                                } focus:border-purple-500/50 custom-scrollbar`}
+                                placeholder="Paste secure token or JWT here..."
                             />
                         </div>
 
                         <button
                             onClick={handleVerify}
                             disabled={verifying || !verifyToken}
-                            className={`w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-500 active:scale-[0.98] ${
+                            className={`w-full py-4 md:py-5 rounded-2xl font-black text-[11px] md:text-[12px] uppercase tracking-[0.21em] transition-all duration-500 active:scale-[0.98] ${
                                 verifying || !verifyToken
                                 ? "bg-neutral-800/80 text-neutral-400"
                                 : "bg-purple-600 hover:bg-purple-500 text-white shadow-xl shadow-purple-900/40"
                             }`}
                         >
-                            {verifying ? "Searching..." : "Validate Signature"}
+                            {verifying ? "Checking Node Registry..." : "Validate Signature"}
                         </button>
                     </div>
 
                     {/* Right: Decoded Data */}
-                    <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar max-h-[400px]">
+                    <div className="space-y-5 overflow-y-auto pr-3 custom-scrollbar flex-1">
                         {verifyStatus?.valid && verifyStatus.metadata ? (
-                            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
+                            <div className="space-y-6 animate-in fade-in slide-in-from-right-8 duration-700">
                                 <JsonBlock 
-                                    title="Header" 
+                                    title="Header Map" 
                                     data={verifyStatus.metadata.header} 
                                     color="text-red-400" 
                                     keyColor="text-red-400"
                                 />
                                 <JsonBlock 
-                                    title="Payload" 
+                                    title="Payload Identity" 
                                     data={verifyStatus.metadata.payload} 
                                     color="text-purple-300" 
                                     keyColor="text-purple-300"
                                 />
                                 
-                                <div className="p-4 rounded-xl bg-green-500/20 border border-green-500/40 flex items-center gap-3">
-                                    <div className="h-6 w-6 flex items-center justify-center rounded-full bg-green-500 text-black shadow-[0_0_10px_rgba(34,197,94,0.5)]">
-                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"/></svg>
+                                <div className="p-5 rounded-2xl bg-green-500/20 border border-green-500/40 flex items-center gap-4 shadow-lg">
+                                    <div className="h-8 w-8 flex items-center justify-center rounded-full bg-green-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.6)]">
+                                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <p className="text-[9px] text-green-300 font-black uppercase tracking-[0.2em]">Signature Match</p>
+                                    <div>
+                                        <p className="text-[10px] text-green-300 font-black uppercase tracking-[0.25em]">Execution Successful</p>
+                                        <p className="text-[9px] text-green-500 font-bold uppercase tracking-widest mt-0.5">Integrity Verified</p>
+                                    </div>
                                 </div>
                             </div>
                         ) : (
-                            <div className="h-full flex flex-col items-center justify-center border border-dashed border-white/10 rounded-[2.5rem] opacity-40 text-center p-8">
-                                <span className="text-[9px] font-black text-neutral-200 uppercase tracking-[0.3em]">Awaiting Data</span>
+                            <div className="h-full min-h-[200px] flex flex-col items-center justify-center border-2 border-dashed border-white/10 rounded-[2.5rem] opacity-50 text-center p-10">
+                                <div className="mb-4 text-neutral-600">
+                                    <svg className="w-12 h-12 mx-auto opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                </div>
+                                <span className="text-[10px] md:text-[11px] font-black text-neutral-400 uppercase tracking-[0.3em] leading-relaxed">System Awaiting<br/>Inbound Data Stream</span>
                             </div>
                         )}
                     </div>
                 </div>
              </div>
-             <p className="text-[9px] font-bold text-purple-400/80 uppercase tracking-widest mt-6 text-center invisible lg:visible opacity-100">Verification Standard v4.2</p>
+             <p className="text-[10px] font-bold text-purple-400/80 uppercase tracking-widest mt-8 text-center invisible lg:visible opacity-100">Verification Standard v4.2.0</p>
         </div>
       </div>
 
       {/* Shared Social Footer */}
-      <footer className="relative z-10 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-6">
+      <footer className="relative z-10 mt-12 py-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex items-center gap-8">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-neutral-300 transition-all duration-300 hover:scale-125 ${link.color}`}
+                className={`text-neutral-300 transition-all duration-300 hover:scale-125 ${link.color} relative group`}
                 title={link.name}
               >
-                {link.icon}
+                <div className="absolute -inset-2 bg-white/0 group-hover:bg-white/5 rounded-full transition-colors duration-300"></div>
+                <span className="relative z-10">{link.icon}</span>
               </a>
             ))}
           </div>
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50">
-            Designed & Engineered by <span className="text-cyan-400">Dawit Solomon</span>
-          </p>
+          <div className="text-center space-y-1">
+             <p className="text-[11px] font-black uppercase tracking-[0.5em] text-white/40">
+                Designed & Engineered by <span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">Dawit Solomon</span>
+             </p>
+             <div className="h-0.5 w-16 bg-gradient-to-r from-transparent via-white/10 to-transparent mx-auto"></div>
+          </div>
         </div>
       </footer>
-      
-
     </div>
   );
 }

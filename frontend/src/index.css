@@ -10,8 +10,8 @@
 
   body {
     @apply bg-[#030308] text-white selection:bg-cyan-500/30 font-sans antialiased;
-    overflow: hidden; /* Lock viewport */
-    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
     /* Improved font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
