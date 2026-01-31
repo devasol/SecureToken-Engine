@@ -349,9 +349,9 @@ function App() {
       </div>
 
       {/* Shared Social Footer */}
-      <footer className="relative z-10 mt-8 py-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-8">
+      <footer className="relative z-10 mt-auto lg:mt-8 py-6 md:py-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 w-full px-4">
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex items-center gap-8 md:gap-10">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.name}
@@ -365,9 +365,12 @@ function App() {
               </a>
             ))}
           </div>
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50">
-            Designed & Engineered by <span className="text-white">Dawit Solomon</span>
-          </p>
+          <div className="text-center space-y-2">
+            <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-white/50 leading-relaxed max-w-[280px] sm:max-w-none">
+              Designed & Engineered by <span className="text-white block sm:inline mt-1 sm:mt-0">Dawit Solomon</span>
+            </p>
+            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto"></div>
+          </div>
         </div>
       </footer>
     </div>
