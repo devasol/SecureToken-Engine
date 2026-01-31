@@ -290,19 +290,53 @@ function App() {
                             />
                         </div>
 
-                        {/* Professional Status Block to fill space */}
-                        <div className="hidden md:flex flex-col gap-4 p-6 rounded-[2rem] bg-white/[0.02] border border-white/5 shadow-inner">
-                            <div className="flex items-center justify-between">
-                                <span className="text-[9px] font-black text-neutral-500 uppercase tracking-[0.3em]">Analysis Node</span>
-                                <span className="text-[9px] font-black text-cyan-500 uppercase tracking-[0.2em]">Active</span>
+                        {/* Real-time Intelligence Dashboard */}
+                        <div className="hidden md:flex flex-col gap-5 p-6 md:p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-2xl relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <svg className="w-20 h-20 text-cyan-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/></svg>
                             </div>
-                            <div className="space-y-2">
-                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <div className="h-full w-2/3 bg-gradient-to-r from-purple-500 to-cyan-500 animate-pulse"></div>
+                            
+                            <div className="flex items-center justify-between relative z-10">
+                                <div className="space-y-1">
+                                    <span className="text-[10px] font-black text-white uppercase tracking-[0.4em]">Intelligence Node</span>
+                                    <div className="flex items-center gap-2">
+                                        <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                                        <span className="text-[9px] font-bold text-green-400 uppercase tracking-widest">Live Analysis</span>
+                                    </div>
                                 </div>
-                                <p className="text-[9px] text-neutral-400 font-bold uppercase tracking-widest leading-relaxed">
-                                    Cross-referencing inbound signature against industrial entropy standards...
-                                </p>
+                                <div className="text-right">
+                                    <span className="text-[10px] font-black text-cyan-400 font-mono tracking-tighter">
+                                        {verifyToken ? (verifyToken.length * 4) : 0}<span className="text-[8px] text-neutral-500 ml-1">BITS</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4 relative z-10">
+                                <div className="space-y-2 p-4 rounded-2xl bg-black/40 border border-white/5">
+                                    <span className="text-[8px] font-black text-neutral-500 uppercase tracking-widest">Entropy Level</span>
+                                    <p className={`text-[10px] font-black uppercase ${!verifyToken ? 'text-neutral-700' : 'text-white'}`}>
+                                        {!verifyToken ? "Idle" : (verifyToken.length > 64 ? "Ultra High" : "Standard")}
+                                    </p>
+                                </div>
+                                <div className="space-y-2 p-4 rounded-2xl bg-black/40 border border-white/5">
+                                    <span className="text-[8px] font-black text-neutral-500 uppercase tracking-widest">Crack Time</span>
+                                    <p className={`text-[10px] font-black uppercase ${!verifyToken ? 'text-neutral-700' : 'text-white'}`}>
+                                        {!verifyToken ? "Infinite" : (verifyToken.length > 32 ? "Centuries" : "Decades")}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 mt-2 relative z-10">
+                                <div className="flex justify-between text-[8px] font-black text-neutral-500 uppercase">
+                                    <span>Signal Strength</span>
+                                    <span>{verifyToken ? Math.min(100, (verifyToken.length / 128) * 100).toFixed(0) : 0}%</span>
+                                </div>
+                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div 
+                                        className="h-full bg-gradient-to-r from-purple-500 via-cyan-500 to-emerald-400 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(34,211,238,0.5)]"
+                                        style={{ width: `${verifyToken ? Math.min(100, (verifyToken.length / 128) * 100) : 0}%` }}
+                                    ></div>
+                                </div>
                             </div>
                         </div>
 
