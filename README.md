@@ -2,6 +2,8 @@
 
 A high-performance, industrial-grade utility for generating cryptographically secure tokens and validating JSON Web Tokens (JWT) with a premium, real-time interface.
 
+**🚀 [Live Demo](https://authgen-3o0f.onrender.com/)**
+
 ![Project Status](https://img.shields.io/badge/Status-Active-emerald?style=for-the-badge)
 ![Tech Stack](https://img.shields.io/badge/Stack-MERN-blue?style=for-the-badge)
 
@@ -56,7 +58,7 @@ npm run dev
 ---
 
 ## 🤝 Connect
-Built with ❤️ by **Dawit Solomon**
+Built by **Dawit Solomon**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/dawit-solomon-t/)
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-lightgrey?style=flat-square&logo=github)](https://github.com/devasol)
