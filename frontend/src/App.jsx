@@ -143,11 +143,10 @@ function App() {
   };
 
   const JsonBlock = ({ title, data, color, keyColor }) => (
-    <div className="space-y-3">
-      <h3 className={`text-[10px] font-black uppercase tracking-[0.25em] ${color}`}>{title}</h3>
-      <div className="bg-black/80 border border-white/20 rounded-xl p-4 md:p-6 font-mono text-[11px] md:text-xs leading-relaxed overflow-x-auto shadow-inner relative group/json">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
-        <pre className="text-neutral-300 relative z-10">
+    <div className="space-y-1.5">
+      <h3 className={`text-[10px] font-black uppercase tracking-widest ${color}`}>{title}</h3>
+      <div className="bg-black/90 border border-white/20 rounded-xl p-4 font-mono text-[10px] leading-relaxed overflow-x-auto shadow-inner">
+        <pre className="text-neutral-300">
           {Object.entries(data).map(([key, val], i) => (
             <div key={key}>
               <span className={keyColor}>"{key}"</span>:{" "}
@@ -163,48 +162,49 @@ function App() {
   );
 
   return (
-    <div className="relative min-h-screen lg:h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-12">
+    <div className="relative min-h-screen lg:h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 lg:overflow-hidden">
       <div className="mesh-bg"></div>
       <div className="absolute inset-0 bg-dot-grid opacity-30"></div>
 
-      {/* Main Hub Container */}
-      <div className="relative z-10 w-full max-w-7xl flex flex-col lg:flex-row items-stretch justify-center gap-6 lg:gap-8 lg:max-h-[85vh]">
+      <div className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row items-stretch justify-center gap-4 lg:max-h-[85vh]">
         
         {/* Generator Window */}
-        <div className="w-full flex-1 glass-morphism rounded-[3rem] p-8 md:p-10 transition-all duration-700 flex flex-col shadow-2xl overflow-hidden border-white/10">
-          <div className="flex-1 flex flex-col space-y-8">
-            <div className="text-left space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-[10px] font-black uppercase tracking-[0.2em] text-cyan-300">
+        <div className="flex-1 glass-morphism rounded-[2.5rem] p-6 transition-all duration-700 flex flex-col justify-between overflow-hidden">
+          <div className="space-y-4">
+            <div className="text-left space-y-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-[9px] font-black uppercase tracking-[0.2em] text-cyan-300">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
                 Token Engine
               </div>
-              <h1 className="text-4xl md:text-6xl font-black tracking-tighter gradient-text leading-tight">Generate</h1>
+              <h1 className="text-4xl font-black tracking-tighter gradient-text leading-none">Generate</h1>
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col gap-3">
+               <div className="grid grid-cols-3 gap-3">
                 {SECURITY_LEVELS.map((tier) => (
-                    <button
-                        key={tier.id}
-                        onClick={() => handleLevelSelect(tier)}
-                        className={`flex flex-col items-center justify-center gap-3 py-5 px-3 rounded-[2rem] transition-all duration-500 border ${
-                            level.id === tier.id 
-                            ? "bg-white/20 border-white/50 text-white shadow-[0_15px_30px_rgba(0,0,0,0.3)] scale-[1.05]" 
-                            : "bg-white/5 border-white/10 text-neutral-400 hover:bg-white/10"
-                        }`}
-                    >
-                        <div className={`p-2.5 rounded-xl ${level.id === tier.id ? `bg-gradient-to-br ${tier.color} shadow-lg shadow-cyan-500/20` : "bg-neutral-800 border border-white/10"}`}>
-                            {tier.icon}
-                        </div>
-                        <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${level.id === tier.id ? "text-white" : "text-neutral-400"}`}>{tier.name}</span>
-                    </button>
+                  <button
+                    key={tier.id}
+                    onClick={() => handleLevelSelect(tier)}
+                    className={`flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-2xl transition-all duration-300 border ${
+                      level.id === tier.id 
+                      ? "bg-white/20 border-white/40 text-white shadow-lg scale-[1.02]" 
+                      : "bg-white/[0.05] border-white/10 text-neutral-300 hover:bg-white/[0.1] hover:border-white/20"
+                    }`}
+                  >
+                    <div className={`p-1.5 rounded-xl ${level.id === tier.id ? `bg-gradient-to-br ${tier.color}` : "bg-neutral-800 border border-white/10"}`}>
+                      {tier.icon}
+                    </div>
+                    <span className={`text-[9px] font-black uppercase tracking-widest ${level.id === tier.id ? "text-white" : "text-neutral-200"}`}>{tier.name}</span>
+                  </button>
                 ))}
+              </div>
             </div>
 
-            <div className="space-y-8 bg-black/40 rounded-[2.5rem] p-8 md:p-10 border border-white/10 shadow-inner">
-               <div className="flex justify-between items-end border-b border-white/10 pb-5">
-                  <span className="text-[11px] font-black text-white/50 uppercase tracking-[0.3em]">Entropy Density</span>
-                  <span className="font-mono text-lg font-black text-cyan-400 shadow-cyan-400/20 drop-shadow-sm">
-                      {length}<span className="text-[10px] text-neutral-500 ml-1">BYTES</span>
+            <div className="space-y-4 bg-black/40 rounded-[2rem] p-6 border border-white/15 shadow-inner">
+               <div className="flex justify-between items-end border-b border-white/10 pb-3">
+                  <span className="text-[9px] font-black text-neutral-200 uppercase tracking-[0.2em]">Entropy</span>
+                  <span className="font-mono text-sm font-black text-cyan-400">
+                      {length}<span className="text-[9px] text-neutral-300 ml-1">BYTES</span>
                   </span>
                </div>
                <input
@@ -214,221 +214,160 @@ function App() {
                   step="4"
                   value={length}
                   onChange={(e) => setLength(parseInt(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-cyan-400"
+                  className="w-full h-1 bg-white/20 rounded-full appearance-none cursor-pointer accent-cyan-400"
                 />
 
               <button
                 onClick={generateToken}
                 disabled={loading}
-                className={`w-full py-5 rounded-2xl font-black text-[12px] uppercase tracking-[0.25em] transition-all duration-500 active:scale-[0.98] flex items-center justify-center gap-3 ${
+                className={`w-full py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-500 active:scale-[0.98] flex items-center justify-center gap-3 ${
                   loading
-                    ? "bg-neutral-800 text-neutral-500 border border-white/5"
-                    : "bg-white text-black hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:scale-[1.01]"
+                    ? "bg-neutral-800 text-neutral-400"
+                    : "bg-white text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                 }`}
               >
-                {loading ? "Decrypting Matrix..." : "Execute Generation"}
+                {loading ? "Processing..." : "Execute Generation"}
               </button>
             </div>
 
-            <div className="relative group/token">
+            <div className="relative group">
               <div 
                 onClick={copyToClipboard}
-                className={`transition-all duration-700 rounded-[2.5rem] border cursor-pointer ${
-                  token ? "bg-black/95 border-cyan-500/40 min-h-[140px] shadow-2xl border-solid" : "bg-white/[0.02] border-white/10 border-dashed min-h-[120px]"
-                } p-8 flex items-center justify-center relative overflow-hidden`}
+                className={`transition-all duration-500 rounded-3xl border cursor-pointer border-dashed ${
+                  token ? "bg-black/95 border-cyan-500/50 min-h-[120px] shadow-2xl" : "bg-white/[0.03] border-white/20 min-h-[100px]"
+                } p-6 flex items-center justify-center relative overflow-hidden`}
               >
                 {token ? (
-                    <p className="text-xs md:text-sm font-mono text-white/90 break-all text-center leading-relaxed select-none font-bold max-w-[90%] tracking-tight">
-                        {token}
-                    </p>
+                  <p className="text-xs font-mono text-white break-all text-center leading-relaxed select-none font-bold max-w-[90%]">
+                    {token}
+                  </p>
                 ) : (
-                    <div className="flex flex-col items-center gap-2 opacity-30">
-                        <div className="h-2 w-12 bg-white/20 rounded-full"></div>
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em]">Standby</span>
-                    </div>
+                  <span className="text-neutral-400 text-[10px] font-black uppercase tracking-[0.3em]">Ready</span>
                 )}
                 {token && (
-                   <div className="absolute top-5 right-7 text-[9px] font-black text-cyan-400 opacity-60 group-hover/token:opacity-100 transition-opacity uppercase tracking-widest bg-cyan-950/40 px-3 py-1.5 rounded-full border border-cyan-500/20 backdrop-blur-md">Copy</div>
+                   <div className="absolute top-3 right-5 text-[8px] font-black text-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-cyan-950/60 px-2 py-0.5 rounded-full border border-cyan-500/30">Copy</div>
                 )}
               </div>
               {copied && (
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-black px-6 py-3.5 rounded-2xl text-[12px] font-black uppercase tracking-[0.3em] shadow-[0_0_40px_rgba(34,197,94,0.6)] animate-in fade-in zoom-in duration-500">Copied</div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-[0_0_20px_rgba(34,197,94,0.5)]">Copied</div>
               )}
             </div>
           </div>
-          <p className="text-[10px] font-black text-cyan-400/40 uppercase tracking-[0.4em] mt-8 text-center border-t border-white/5 pt-6">Industrial Standard v4.2</p>
+          <p className="text-[9px] font-black text-cyan-400/80 uppercase tracking-widest mt-6 text-center">Industrial Standard v4.2</p>
         </div>
 
         {/* Verifier Window */}
-        <div className="w-full flex-[1.4] glass-morphism rounded-[3rem] p-8 md:p-10 transition-all duration-700 flex flex-col shadow-2xl border-white/10 overflow-hidden">
-             <div className="flex-1 flex flex-col space-y-8">
-                <div className="text-left space-y-3">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-[10px] font-black uppercase tracking-[0.2em] text-purple-300">
+        <div className="flex-[1.3] glass-morphism rounded-[2.5rem] p-6 transition-all duration-700 flex flex-col border-white/10 overflow-hidden">
+             <div className="space-y-4 h-full flex flex-col">
+                <div className="text-left space-y-1">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-[9px] font-black uppercase tracking-[0.2em] text-purple-300">
                         <span className="flex h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"></span>
-                        Cloud Validator
+                        Validator
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white leading-tight">Verify</h1>
+                    <h1 className="text-4xl font-black tracking-tight text-white leading-none">Verify</h1>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1 overflow-hidden">
                     {/* Left: Input */}
-                    <div className="space-y-6 flex flex-col h-full overflow-hidden">
-                        <div className="flex flex-col gap-3 flex-1 overflow-hidden">
-                             <div className="flex justify-between items-center text-[11px] font-black text-white/40 uppercase tracking-[0.3em]">
-                                <span>Input Payload</span>
+                    <div className="space-y-4 flex flex-col h-full overflow-hidden">
+                        <div className="flex flex-col gap-2 flex-1 overflow-hidden">
+                             <div className="flex justify-between items-center text-[9px] font-black text-neutral-300 uppercase tracking-[0.2em]">
+                                <span>Input</span>
                                 {verifyStatus && (
-                                    <div className="flex items-center gap-2">
-                                        <span className={`h-1.5 w-1.5 rounded-full animate-pulse ${verifyStatus.valid ? "bg-green-500" : "bg-red-500"}`}></span>
-                                        <span className={(verifyStatus.valid ? "text-green-400" : "text-red-400") + " font-black tracking-widest text-[9px]"}>
-                                            {verifyStatus.valid ? "SUCCESS" : "FAILED"}
-                                        </span>
-                                    </div>
+                                    <span className={(verifyStatus.valid ? "text-green-400" : "text-red-400") + " font-bold"}>
+                                        {verifyStatus.valid ? "• Verified" : "• Invalid"}
+                                    </span>
                                 )}
                              </div>
                              <textarea
                                 value={verifyToken}
                                 onChange={(e) => setVerifyToken(e.target.value)}
-                                className={`w-full h-40 md:h-56 bg-black/60 border rounded-[2rem] p-7 md:p-8 font-mono text-xs md:text-sm outline-none transition-all resize-none placeholder:text-white/10 shadow-inner ${
-                                    verifyStatus?.valid ? "border-green-500/40 text-green-300 shadow-[0_0_40px_rgba(34,197,94,0.1)]" : "border-white/10 text-white/80"
-                                } focus:border-purple-500/40 custom-scrollbar`}
-                                placeholder="Paste encrypted stream..."
+                                className={`w-full flex-1 min-h-[140px] bg-black/80 border rounded-2xl p-5 font-mono text-xs outline-none transition-all resize-none placeholder:text-neutral-700 ${
+                                    verifyStatus?.valid ? "border-green-500/50 text-green-300 shadow-[0_0_20px_rgba(34,197,94,0.1)]" : "border-white/20 text-white"
+                                } focus:border-purple-500/50`}
+                                placeholder="Paste token..."
                             />
                         </div>
 
-                        {/* Intelligence Hub */}
-                        <div className="flex flex-col gap-6 p-6 md:p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-xl relative overflow-hidden group/intel">
-                            <div className="absolute -top-4 -right-4 h-24 w-24 opacity-[0.03] group-hover/intel:opacity-[0.06] transition-opacity">
-                                <svg className="h-full w-full text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z"/></svg>
-                            </div>
-                            
-                            <div className="flex items-center justify-between relative z-10">
-                                <div>
-                                    <span className="text-[10px] font-black text-white/70 uppercase tracking-[0.4em]">Intelligence Node</span>
-                                    <div className="flex items-center gap-2 mt-1">
-                                        <div className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></div>
-                                        <span className="text-[9px] font-bold text-green-400/80 uppercase tracking-widest">Live Link</span>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="text-[10px] font-black text-cyan-400 font-mono tracking-tighter">
-                                        {verifyToken ? (verifyToken.length * 4) : 0}<span className="text-[8px] text-neutral-500 ml-1">B-SEC</span>
-                                    </div>
+                        {/* Real-time Intel (Simplified & Slimmer) */}
+                        <div className="hidden md:flex flex-col gap-3 p-4 rounded-3xl bg-white/[0.02] border border-white/5 shadow-inner">
+                            <div className="flex items-center justify-between">
+                                <span className="text-[8px] font-black text-neutral-500 uppercase tracking-[0.3em]">Intelligence Node</span>
+                                <div className="text-[9px] font-black text-cyan-400 font-mono">
+                                    {verifyToken ? (verifyToken.length * 4) : 0}<span className="text-[7px] text-neutral-600 ml-1">BITS</span>
                                 </div>
                             </div>
-
-                            <div className="grid grid-cols-2 gap-4 relative z-10">
-                                <div className="space-y-2.5 p-4 rounded-2xl bg-black/40 border border-white/5 shadow-inner">
-                                    <span className="text-[8px] font-black text-white/20 uppercase tracking-[0.2em]">Entropy</span>
-                                    <p className={`text-[10px] font-black uppercase tracking-widest ${!verifyToken ? 'text-neutral-700' : 'text-white'}`}>
-                                        {!verifyToken ? "Link Idle" : (verifyToken.length > 64 ? "Extreme" : "Compliant")}
-                                    </p>
+                            <div className="grid grid-cols-2 gap-2">
+                                <div className="bg-black/40 p-2 rounded-xl border border-white/5">
+                                    <p className="text-[8px] font-black text-white uppercase">{!verifyToken ? "Idle" : (verifyToken.length > 64 ? "Extreme" : "Standard")}</p>
                                 </div>
-                                <div className="space-y-2.5 p-4 rounded-2xl bg-black/40 border border-white/5 shadow-inner">
-                                    <span className="text-[8px] font-black text-white/20 uppercase tracking-[0.2em]">Integrity</span>
-                                    <p className={`text-[10px] font-black uppercase tracking-widest ${!verifyToken ? 'text-neutral-700' : 'text-white'}`}>
-                                        {!verifyToken ? "Pending" : (verifyToken.length > 32 ? "High-Tier" : "Low-Tier")}
-                                    </p>
+                                <div className="bg-black/40 p-2 rounded-xl border border-white/5">
+                                    <p className="text-[8px] font-black text-white uppercase">{!verifyToken ? "Pending" : (verifyToken.length > 32 ? "Secure" : "Low")}</p>
                                 </div>
                             </div>
-
-                            <div className="space-y-2 mt-1 relative z-10">
-                                <div className="flex justify-between text-[8px] font-black text-white/30 uppercase tracking-[0.25em]">
-                                    <span>Sync Strength</span>
-                                    <span>{verifyToken ? Math.min(100, (verifyToken.length / 128) * 100).toFixed(0) : 0}%</span>
-                                </div>
-                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden shadow-inner">
-                                    <div 
-                                        className="h-full bg-gradient-to-r from-purple-500 via-cyan-500 to-emerald-400 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(34,211,238,0.3)]"
-                                        style={{ width: `${verifyToken ? Math.min(100, (verifyToken.length / 128) * 100) : 0}%` }}
-                                    ></div>
-                                </div>
+                            <div className="h-0.5 w-full bg-white/5 rounded-full overflow-hidden mt-1">
+                                <div className="h-full bg-gradient-to-r from-purple-500 to-cyan-500 shadow-glow" style={{ width: `${verifyToken ? Math.min(100, (verifyToken.length / 128) * 100) : 0}%` }}></div>
                             </div>
                         </div>
 
                         <button
                             onClick={handleVerify}
                             disabled={verifying || !verifyToken}
-                            className={`w-full py-5 rounded-2xl font-black text-[12px] uppercase tracking-[0.25em] transition-all duration-500 active:scale-[0.98] ${
+                            className={`w-full py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-500 active:scale-[0.98] ${
                                 verifying || !verifyToken
-                                ? "bg-neutral-800/50 text-neutral-600 border border-white/5"
-                                : "bg-purple-600 hover:bg-purple-500 text-white shadow-[0_20px_40px_rgba(147,51,234,0.3)] hover:scale-[1.01]"
+                                ? "bg-neutral-800/80 text-neutral-400"
+                                : "bg-purple-600 hover:bg-purple-500 text-white shadow-xl shadow-purple-900/40"
                             }`}
                         >
-                            {verifying ? "Tunneling Connection..." : "Validate Signature"}
+                            {verifying ? "Searching..." : "Validate Signature"}
                         </button>
                     </div>
 
                     {/* Right: Decoded Data */}
-                    <div className="space-y-6 overflow-y-auto pr-4 custom-scrollbar flex-1 pb-4">
+                    <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar flex-1 h-full">
                         {verifyStatus?.valid && verifyStatus.metadata ? (
-                            <div className="space-y-6 animate-in fade-in slide-in-from-right-12 duration-1000">
-                                <JsonBlock 
-                                    title="Protocol Header" 
-                                    data={verifyStatus.metadata.header} 
-                                    color="text-red-400/80" 
-                                    keyColor="text-red-400"
-                                />
-                                <JsonBlock 
-                                    title="Identity Payload" 
-                                    data={verifyStatus.metadata.payload} 
-                                    color="text-purple-300/80" 
-                                    keyColor="text-purple-300"
-                                />
-                                
-                                <div className="p-6 rounded-[2rem] bg-green-500/10 border border-green-500/30 flex items-center gap-5 shadow-2xl relative overflow-hidden group/success">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-green-500/[0.02] to-transparent"></div>
-                                    <div className="h-10 w-10 flex items-center justify-center rounded-full bg-green-500 text-black shadow-[0_0_25px_rgba(34,197,94,0.5)] relative z-10">
-                                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"/></svg>
+                            <div className="space-y-3 animate-in fade-in slide-in-from-right-4 duration-500 pb-2">
+                                <JsonBlock title="Header" data={verifyStatus.metadata.header} color="text-red-400" keyColor="text-red-400" />
+                                <JsonBlock title="Payload" data={verifyStatus.metadata.payload} color="text-purple-300" keyColor="text-purple-300" />
+                                <div className="p-3 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center gap-3">
+                                    <div className="h-6 w-6 flex items-center justify-center rounded-full bg-green-500 text-black shadow-glow-sm">
+                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div className="relative z-10">
-                                        <p className="text-[11px] text-green-400 font-black uppercase tracking-[0.3em]">Signature Match</p>
-                                        <p className="text-[9px] text-green-600 font-bold uppercase tracking-[0.2em] mt-1">Protocol Execution Secure</p>
-                                    </div>
+                                    <p className="text-[9px] text-green-300 font-black uppercase tracking-widest">Secure Match</p>
                                 </div>
                             </div>
                         ) : (
-                            <div className="h-full min-h-[300px] flex flex-col items-center justify-center border-2 border-dashed border-white/5 rounded-[3rem] opacity-30 text-center p-12 group/wait">
-                                <div className="mb-6 transform group-hover/wait:scale-110 transition-transform duration-700">
-                                    <svg className="w-16 h-16 mx-auto text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                </div>
-                                <span className="text-[11px] font-black text-white/50 uppercase tracking-[0.4em] leading-loose">
-                                    System Awaiting<br/>
-                                    Inbound Data<br/>
-                                    Stream
-                                </span>
+                            <div className="h-full flex flex-col items-center justify-center border border-dashed border-white/10 rounded-[2rem] opacity-30 text-center p-6 bg-white/[0.01]">
+                                <span className="text-[9px] font-black text-neutral-200 uppercase tracking-[0.3em] leading-relaxed">Awaiting Data Stream</span>
                             </div>
                         )}
                     </div>
                 </div>
              </div>
-             <p className="text-[10px] font-bold text-purple-400/40 uppercase tracking-[0.4em] mt-8 text-center border-t border-white/5 pt-6 invisible lg:visible opacity-100">Verification Standard v4.2.0</p>
+             <p className="text-[9px] font-bold text-purple-400/80 uppercase tracking-widest mt-6 text-center invisible lg:visible opacity-100">Verification Standard v4.2</p>
         </div>
       </div>
 
       {/* Shared Social Footer */}
-      <footer className="relative z-10 mt-16 py-8 animate-in fade-in slide-in-from-bottom-12 duration-1000">
-        <div className="flex flex-col items-center gap-8">
-          <div className="flex items-center gap-12">
+      <footer className="relative z-10 mt-8 py-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-8">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-white/40 transition-all duration-500 hover:text-white hover:scale-150 ${link.color} relative group/social`}
+                className={`text-neutral-500 transition-all duration-300 hover:scale-125 ${link.color}`}
                 title={link.name}
               >
-                <div className="absolute -inset-4 bg-white/0 group-hover/social:bg-white/5 rounded-full blur-xl transition-all duration-500"></div>
-                <span className="relative z-10">{link.icon}</span>
+                {link.icon}
               </a>
             ))}
           </div>
-          <div className="text-center space-y-2">
-             <p className="text-[12px] font-black uppercase tracking-[0.6em] text-white/30">
-                Designed & Engineered by <span className="text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]">Dawit Solomon</span>
-             </p>
-             <div className="h-1 w-24 bg-gradient-to-r from-transparent via-white/10 to-transparent mx-auto rounded-full"></div>
-          </div>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50">
+            Designed & Engineered by <span className="text-white">Dawit Solomon</span>
+          </p>
         </div>
       </footer>
     </div>
