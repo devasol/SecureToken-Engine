@@ -359,25 +359,7 @@ function App() {
         </div>
       </footer>
       
-      <style dangerouslySetInnerHTML={{ __html: `
-        .custom-scrollbar::-webkit-scrollbar { 
-          width: 4px; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-track { 
-          background: rgba(0,0,0,0.05); 
-          border-radius: 20px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb { 
-          background: linear-gradient(to bottom, rgba(168,85,247,0.3), rgba(6,182,212,0.3));
-          border-radius: 20px;
-          border: 1px solid rgba(255,255,255,0.05);
-          transition: all 0.3s ease;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { 
-          background: linear-gradient(to bottom, rgba(168,85,247,0.6), rgba(6,182,212,0.6));
-          box-shadow: 0 0 10px rgba(168,85,247,0.2);
-        }
-      `}} />
+
     </div>
   );
 }

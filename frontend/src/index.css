@@ -10,7 +10,8 @@
 
   body {
     @apply bg-[#030308] text-white selection:bg-cyan-500/30 font-sans antialiased;
-    overflow-x: hidden;
+    overflow: hidden; /* Lock viewport */
+    height: 100vh;
     /* Improved font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -28,11 +29,9 @@
 
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-cyan-400;
-  /* Add subtle drop shadow to text for better contrast on gradients */
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
-/* Enhanced Mesh Background with deeper contrast */
 .mesh-bg {
   position: fixed;
   top: 0;
@@ -51,20 +50,48 @@
   background-size: 30px 30px;
 }
 
-.animate-pulse-slow {
-  animation: pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+/* AMAZING CUSTOM SCROLLBAR - GLOBAL */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.4) rgba(0, 0, 0, 0.2);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(1.05); }
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-input[type="range"] {
-  @apply accent-cyan-400 cursor-pointer;
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
-/* Improved text contrast utility */
-.text-sharp {
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #c084fc 0%, #22d3ee 100%);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+/* For inner JSON blocks */
+pre::-webkit-scrollbar {
+  height: 4px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
