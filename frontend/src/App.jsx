@@ -283,11 +283,27 @@ function App() {
                              <textarea
                                 value={verifyToken}
                                 onChange={(e) => setVerifyToken(e.target.value)}
-                                className={`w-full flex-1 bg-black/80 border rounded-[2rem] p-6 md:p-8 font-mono text-xs md:text-sm outline-none transition-all resize-none placeholder:text-neutral-600 ${
+                                className={`w-full h-40 md:h-52 bg-black/80 border rounded-[2rem] p-6 md:p-8 font-mono text-xs md:text-sm outline-none transition-all resize-none placeholder:text-neutral-600 ${
                                     verifyStatus?.valid ? "border-green-500/50 text-green-300 shadow-[0_0_30px_rgba(34,197,94,0.15)]" : "border-white/20 text-white"
                                 } focus:border-purple-500/50 custom-scrollbar`}
                                 placeholder="Paste secure token or JWT here..."
                             />
+                        </div>
+
+                        {/* Professional Status Block to fill space */}
+                        <div className="hidden md:flex flex-col gap-4 p-6 rounded-[2rem] bg-white/[0.02] border border-white/5 shadow-inner">
+                            <div className="flex items-center justify-between">
+                                <span className="text-[9px] font-black text-neutral-500 uppercase tracking-[0.3em]">Analysis Node</span>
+                                <span className="text-[9px] font-black text-cyan-500 uppercase tracking-[0.2em]">Active</span>
+                            </div>
+                            <div className="space-y-2">
+                                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div className="h-full w-2/3 bg-gradient-to-r from-purple-500 to-cyan-500 animate-pulse"></div>
+                                </div>
+                                <p className="text-[9px] text-neutral-400 font-bold uppercase tracking-widest leading-relaxed">
+                                    Cross-referencing inbound signature against industrial entropy standards...
+                                </p>
+                            </div>
                         </div>
 
                         <button
