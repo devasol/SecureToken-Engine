@@ -272,7 +272,7 @@ function App() {
                              <div className="flex justify-between items-center text-[9px] font-black text-neutral-300 uppercase tracking-[0.2em]">
                                 <span>Input</span>
                                 {verifyStatus && (
-                                    <span className={verifyStatus.valid ? "text-green-400" : "text-red-400" font-bold}>
+                                    <span className={(verifyStatus.valid ? "text-green-400" : "text-red-400") + " font-bold"}>
                                         {verifyStatus.valid ? "• Verified" : "• Invalid"}
                                     </span>
                                 )}
