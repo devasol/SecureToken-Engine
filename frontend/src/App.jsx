@@ -90,7 +90,7 @@ function App() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch("http://localhost:5000/generate-token", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/generate-token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ maxLength: length, securityTier: level.name }),
@@ -113,7 +113,7 @@ function App() {
     setVerifying(true);
     setVerifyStatus(null);
     try {
-      const response = await fetch("http://localhost:5000/verify-token", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/verify-token`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: verifyToken }),
